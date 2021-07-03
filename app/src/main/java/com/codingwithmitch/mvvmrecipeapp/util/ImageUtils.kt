@@ -36,14 +36,17 @@ fun loadPicture(url: String, @DrawableRes defaultImage: Int): MutableState<Bitma
             })
 
     // get network image
-    Glide.with(AmbientContext.current)
+    //load image if url if not null
+    url?.let {
+        // get network image
+        Glide.with(AmbientContext.current)
             .asBitmap()
             .load(url)
             .into(object : CustomTarget<Bitmap>() {
-                override fun onLoadCleared(placeholder: Drawable?) { }
+                override fun onLoadCleared(placeholder: Drawable?) {}
                 override fun onResourceReady(
-                        resource: Bitmap,
-                        transition: Transition<in Bitmap>?
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
                 ) {
                     bitmapState.value = resource
                 }
